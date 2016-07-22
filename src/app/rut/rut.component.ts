@@ -1,50 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { RutService } from './rut.service';
 
 @Component({
   moduleId: module.id,
   selector: 'ng2-rut',
   inputs: ['mode'],
+  providers: [RutService],
   templateUrl: 'rut.component.html',
   styleUrls: ['rut.component.css'],
 })
-export class RutComponent implements OnInit {
+export class RutComponent {
   public modelValue: string;
   public viewValue: string;
   public mode: string;
+  private srv: RutService;
 
-  constructor() {
+  constructor(
+    rutService: RutService
+  ) {
     this.mode = 'live';
-  }
-
-  public ngOnInit() {
-    // TODO
+    this.srv = rutService;
   }
 
   public updateLive(value: string) {
-    if (this.mode == 'live') {
+    if (this.mode === 'live') {
       this.updateValue(value);
     }
   }
 
   public updateValue(value: string) {
-    this.modelValue = this.cleanRut(value);
-    this.viewValue = this.formatRut(value, null);
-  }
-
-  private cleanRut(value: string) {
-    return typeof value === 'string' ? value.replace(/[^0-9kK]+/g, '').toUpperCase() : '';
-  }
-
-  private formatRut(value: string, defaultValue: string) {
-    value = this.cleanRut(value);
-
-    if (!value) { return defaultValue; }
-    if (value.length <= 1) { return value; }
-
-    let result: string = value.slice(-4, -1) + '-' + value.substr(value.length - 1);
-    for (let i: number = 4; i < value.length; i += 3) {
-      result = value.slice(-3 - i, -i) + '.' + result;
-    }
-    return result;
+    this.modelValue = this.srv.cleanRut(value);
+    this.viewValue = this.srv.formatRut(value, null);
   }
 }
