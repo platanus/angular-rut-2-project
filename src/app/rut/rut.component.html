@@ -1,0 +1,11 @@
+<input type="text"
+  [ngModel]="modelValue"
+  (ngModelChange)="updateLive($event)"
+  (blur)="updateValue($event.currentTarget.value)"
+  value="{{ viewValue }}"/>
+<p>
+{{ viewValue }}
+</p>
+<p>
+{{ modelValue }}
+</p>
