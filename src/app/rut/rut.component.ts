@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { RutService } from './rut.service';
+import { RutPipe } from './rut.pipe';
 
 @Component({
   moduleId: module.id,
   selector: 'ng2-rut',
   inputs: ['mode'],
   providers: [RutService],
+  pipes: [RutPipe],
   templateUrl: 'rut.component.html',
   styleUrls: ['rut.component.css'],
 })

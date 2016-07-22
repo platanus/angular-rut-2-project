@@ -1,11 +1,13 @@
 <input type="text"
-  [ngModel]="modelValue"
-  (ngModelChange)="updateLive($event)"
+  (change)="updateLive($event.currentTarget.value)"
   (blur)="updateValue($event.currentTarget.value)"
   value="{{ viewValue }}"/>
 <p>
-{{ viewValue }}
+viewValue: {{ viewValue }}
 </p>
 <p>
-{{ modelValue }}
+modelValue: {{ modelValue }}
+</p>
+<p>
+pipeValue: {{ modelValue | rut }}
 </p>

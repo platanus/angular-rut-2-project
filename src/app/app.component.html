@@ -2,6 +2,22 @@
   {{title}}
 </h1>
 
-<form>
-  <ng2-rut></ng2-rut>
+<!-- <ng2-rut [model-value]="myRut" mode="blur"></ng2-rut> -->
+
+<form [ngFormModel]="registrationForm" (ngSubmit)="registerUser(registrationForm.value)">
+  <div>
+    <label for="username">Username</label>
+    <input id="username" type="text" placeholder="Username" ngControl="username">
+    <em *ngIf="!username.valid && submitAttempt">Required</em>
+  </div>
+<!-- 
+  <div class="form-group">
+    <label for="rut">RUT</label>
+    <ng2-rut [model-value]="myRut" placeholder="Rut" ngControl="rut"></ng2-rut>
+    <em *ngIf="!rut.valid && submitAttempt">Required</em>
+  </div> -->
+
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary">Register</button>
+  </div>
 </form>
